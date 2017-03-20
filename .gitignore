@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/ReadBook/ReadBook.UWP/obj
+/ReadBook/ReadBook.UWP/bin
+/ReadBook/ReadBook.Android/obj
+/ReadBook/ReadBook.Android/bin
+/ReadBook/ReadBook.iOS/obj
+/ReadBook/ReadBook.iOS/bin
+/packages
+/.vs
+*.userprefs
+*.user
+/Components

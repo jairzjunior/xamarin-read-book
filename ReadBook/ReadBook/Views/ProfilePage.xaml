@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+		xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		x:Class="ReadBook.Views.ProfilePage"
+		Title="{Binding Title}">
+	<ContentPage.Content>
+		<ScrollView>
+			<StackLayout Spacing="20" Padding="15">
+				<Label Text="Usuário" FontSize="Medium" />
+				<Label Text="{Binding User.Username}" FontSize="Small" />
+				<Label Text="Nome" FontSize="Medium" />
+				<Label Text="{Binding User.Name}" FontSize="Small" />
+				<Label Text="E-mail" FontSize="Medium" />
+				<Label Text="{Binding User.Email}" FontSize="Small" Margin="0" />
+				
+				<Label Text="Gamification" FontSize="Medium" Margin="0" FontAttributes="Bold" />
+				<Label Text="Livros Lidos" FontSize="Medium" />
+				<Label Text="{Binding Gamification.BooksRead}" FontSize="Small" Margin="0" />
+				<Label Text="Pontos" FontSize="Medium" />
+				<Label Text="{Binding Gamification.Points}" FontSize="Small" Margin="0" />
+				<Label Text="Troféus" FontSize="Medium" />
+				<Label Text="{Binding Gamification.Trophy}" FontSize="Small" Margin="0" />
+			</StackLayout>
+		</ScrollView>
+	</ContentPage.Content>
+</ContentPage>
