@@ -30,10 +30,10 @@ namespace ReadBook.ViewModels
 			try
 			{
 				Gamifications.Clear();                
-                var items = DataStore.Connection.Table<Gamification>().ToList();
+                var items = await DataStore.Connection.Table<Gamification>().ToListAsync();
                 foreach (var item in items.OrderByDescending(g => g.Points))
 				{                    
-                    item.User = DataStore.Connection.Table<User>().FirstOrDefault(u => u.Id == item.UserId);
+                    item.User = (await DataStore.Connection.Table<User>().ToListAsync()).FirstOrDefault(u => u.Id == item.UserId);
                     Gamifications.Add(item);
 				}
 			}

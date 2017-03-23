@@ -34,7 +34,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IDataService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\ISQLite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IFileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\BaseDataObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Book.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Gamification.cs" />

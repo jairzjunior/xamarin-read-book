@@ -35,7 +35,7 @@ namespace ReadBook.Views
 				Password = passwordEntry.Text
 			};
 
-			var isValid = AreCredentialsCorrect(user);
+			var isValid = await AreCredentialsCorrect(user);
 			if (isValid)
 			{
 				App.IsUserLoggedIn = true;
@@ -49,9 +49,9 @@ namespace ReadBook.Views
 			}
 		}
 
-		bool AreCredentialsCorrect(User user)
+		async Task<bool> AreCredentialsCorrect(User user)
 		{
-			return viewModel.Login(user);
+			return await viewModel.Login(user);
 		}
 	}
 }

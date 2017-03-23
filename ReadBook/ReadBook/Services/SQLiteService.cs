@@ -10,41 +10,41 @@ namespace ReadBook.Services
 {   
     public class SQLiteService : IDataService
 	{
-        private readonly SQLiteConnection connection;
+        private readonly SQLiteAsyncConnection connection;
 
-        public SQLiteConnection Connection
+        public SQLiteAsyncConnection Connection
         {
             get { return connection; }
         }
 
         public SQLiteService()
-		{            
-            connection = DependencyService.Get<ISQLite>().GetConnection();
-            connection.CreateTable<User>();
-            connection.CreateTable<Book>();
-            connection.CreateTable<UserBook>();            
-            connection.CreateTable<Gamification>();			
-		}        
+		{
+            connection = new SQLiteAsyncConnection(DependencyService.Get<IFileHelper>().GetLocalFilePath("db.db3"));            
 
-        public Task<bool> InsertAsync<T>(T item)
-		{            
-            connection.Insert(item);
-
-            return Task.FromResult(true);
+            connection.CreateTableAsync<User>().Wait();
+            connection.CreateTableAsync<Book>().Wait();
+            connection.CreateTableAsync<UserBook>().Wait();
+            connection.CreateTableAsync<Gamification>().Wait();
         }        
 
-        public Task<bool> UpdateAsync<T>(T item)
-		{            
-            connection.Update(item);
+        public async Task<bool> InsertAsync<T>(T item)
+		{
+            await connection.InsertAsync(item);
+            return true;
+        }        
 
-            return Task.FromResult(true);
+        public async Task<bool> UpdateAsync<T>(T item)
+		{            
+            await connection.UpdateAsync(item);
+
+            return true;
         }
 
-		public Task<bool> DeleteAsync<T>(T item)
+		public async Task<bool> DeleteAsync<T>(T item)
 		{            
-            connection.Delete(item);
+            await connection.DeleteAsync(item);
 
-            return Task.FromResult(true);
+            return true;
         }        
 
 		public bool PullLatest()

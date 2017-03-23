@@ -6,8 +6,6 @@
 	<string>ReadBook</string>
 	<key>CFBundleName</key>
 	<string>ReadBook</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.companyname.ReadBook</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -42,5 +40,7 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.jairzjunior.readbook</string>
 </dict>
 </plist>

@@ -137,7 +137,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Storage\Implementations\SQLiteDroid.cs" />
+    <Compile Include="Implementations\SQLiteDroid.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

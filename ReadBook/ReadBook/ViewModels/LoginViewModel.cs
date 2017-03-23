@@ -6,10 +6,10 @@ namespace ReadBook.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {		
-		public bool Login(User user)
+		public async Task<bool> Login(User user)
 		{
 			App.User = null;            
-            var users = DataStore.Connection.Table<User>().ToList();
+            var users = await DataStore.Connection.Table<User>().ToListAsync();
             if (users != null && users.Count > 0)
 
             {

@@ -26,9 +26,9 @@ namespace ReadBook.ViewModels
 			IsRead();
         }
 
-		private void IsRead()
+		private async void IsRead()
 		{           
-            var userBooks = DataStore.Connection.Table<UserBook>().ToList();
+            var userBooks = await DataStore.Connection.Table<UserBook>().ToListAsync();
             ReadText = "Marcar como lido";
 			var userBook = userBooks.FirstOrDefault(u => (u.UserId == App.User.Id) & (u.BookId == Book.Id));
 			Book.IsRead = (userBook != null);
@@ -45,7 +45,7 @@ namespace ReadBook.ViewModels
 			{				
 				var isNewUser = true;
 				Gamification gamification = new Gamification();                
-                var gamifications = DataStore.Connection.Table<Gamification>().ToList();
+                var gamifications = await DataStore.Connection.Table<Gamification>().ToListAsync();
                 if (gamifications != null)
 				{
 					var gamificationUser = gamifications.FirstOrDefault(a => a.UserId == userBook.UserId);
@@ -66,11 +66,11 @@ namespace ReadBook.ViewModels
 				gamification.Points += valuePoint;
 
 				var userBooks = new List<UserBook>();                
-                foreach (var item in DataStore.Connection.Table<UserBook>().ToList())
+                foreach (var item in await DataStore.Connection.Table<UserBook>().ToListAsync())
 				{
 					if (item.UserId == userBook.UserId)
 					{                        
-                        item.Book = DataStore.Connection.Table<Book>().FirstOrDefault(b => b.Id == item.BookId);
+                        item.Book = (await DataStore.Connection.Table<Book>().ToListAsync()).FirstOrDefault(b => b.Id == item.BookId);
                         userBooks.Add(item);
 					}
 				}

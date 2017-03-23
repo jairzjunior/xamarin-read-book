@@ -62,7 +62,7 @@ namespace ReadBook.ViewModels
             }
         }
 
-        void ExecuteLoadItemsCommand()
+        async void ExecuteLoadItemsCommand()
         {
             if (IsBusy)
                 return;
@@ -72,11 +72,11 @@ namespace ReadBook.ViewModels
             try
             {
                 Books.Clear();
-                var items = DataStore.Connection.Table<Book>().ToList();
+                var items = await DataStore.Connection.Table<Book>().ToListAsync();
                 if (items.Count == 0)
                 {
                     PopulateBooks();
-                    items = DataStore.Connection.Table<Book>().ToList();
+                    items = await DataStore.Connection.Table<Book>().ToListAsync();
                 }                    
                 Books.ReplaceRange(items);
             }

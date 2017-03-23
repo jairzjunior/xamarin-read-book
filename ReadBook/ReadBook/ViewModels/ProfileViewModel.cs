@@ -24,9 +24,9 @@ namespace ReadBook.ViewModels
 			LoadGamification();
         }
 
-		public void LoadGamification()
+		public async void LoadGamification()
 		{            
-            var gamifications = DataStore.Connection.Table<Gamification>().ToList();
+            var gamifications = await DataStore.Connection.Table<Gamification>().ToListAsync();
             if (gamifications != null)
 			{
 				Gamification = gamifications.FirstOrDefault(a => a.UserId == User.Id);
