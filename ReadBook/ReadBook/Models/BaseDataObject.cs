@@ -1,6 +1,6 @@
 ﻿using System;
 using ReadBook.Helpers;
-using SQLite;
+//using SQLite;
 
 namespace ReadBook.Models
 {
@@ -11,7 +11,7 @@ namespace ReadBook.Models
             Id = Guid.NewGuid().ToString();
         }
         
-        [PrimaryKey]        
+        //[PrimaryKey]        
         public string Id { get; set; }        
     }
 }

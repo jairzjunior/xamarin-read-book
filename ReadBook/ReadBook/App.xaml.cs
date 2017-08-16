@@ -1,30 +1,22 @@
 ﻿using ReadBook.Models;
 using ReadBook.ViewModels;
 using ReadBook.Views;
+using ReadBook.Helpers;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ReadBook.Interfaces;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace ReadBook
 {
     public partial class App : Application
-    {
-		public static bool IsUserLoggedIn { get; set; }
-		public static User User { get; set; }
-
+    {				
         public App()
         {
             InitializeComponent();
-
-			if (!IsUserLoggedIn)
-			{
-				Current.MainPage = new NavigationPage(new LoginPage(new LoginViewModel()));
-			}
-			else
-			{
-				SetMainPage();
-			}			            
+            
+            Current.MainPage = new LoginPage();
         }
 
         public static void SetMainPage()
@@ -44,7 +36,7 @@ namespace ReadBook
                         Icon = Device.OnPlatform("tab_about.png",null,null)
                     },
                 }
-            };
+            };            
         }
     }
 }

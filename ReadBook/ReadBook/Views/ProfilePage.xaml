@@ -5,23 +5,30 @@
 		x:Class="ReadBook.Views.ProfilePage"
 		Title="{Binding Title}">
 	<ContentPage.Content>
-		<ScrollView>
-			<StackLayout Spacing="20" Padding="15">
-				<Label Text="Usuário" FontSize="Medium" />
-				<Label Text="{Binding User.Username}" FontSize="Small" />
-				<Label Text="Nome" FontSize="Medium" />
-				<Label Text="{Binding User.Name}" FontSize="Small" />
-				<Label Text="E-mail" FontSize="Medium" />
-				<Label Text="{Binding User.Email}" FontSize="Small" Margin="0" />
-				
-				<Label Text="Gamification" FontSize="Medium" Margin="0" FontAttributes="Bold" />
-				<Label Text="Livros Lidos" FontSize="Medium" />
-				<Label Text="{Binding Gamification.BooksRead}" FontSize="Small" Margin="0" />
-				<Label Text="Pontos" FontSize="Medium" />
-				<Label Text="{Binding Gamification.Points}" FontSize="Small" Margin="0" />
-				<Label Text="Troféus" FontSize="Medium" />
-				<Label Text="{Binding Gamification.Trophy}" FontSize="Small" Margin="0" />
-			</StackLayout>
+        <ScrollView>
+            <StackLayout Spacing="5" Padding="5">
+                <Frame HasShadow="True">
+                    <StackLayout Spacing="5">
+                        <Image Source="{Binding ImageProfile}"></Image>
+                        <Label Text="Nome" FontSize="Medium" />
+				        <Label Text="{Binding User.Name}" FontSize="Small" />
+				        <Label Text="E-mail" FontSize="Medium" />
+                        <Label Text="{Binding User.Email}" FontSize="Small" Margin="0" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame HasShadow="True">
+                    <StackLayout Spacing="5">
+                        <Label Text="Gamification" FontSize="Medium" TextColor="{StaticResource Accent}" FontAttributes="Bold" />
+                        <Label Text="Livros Lidos" FontSize="Medium" />
+                        <Label Text="{Binding Gamification.BooksRead}" FontSize="Small" Margin="0" />
+                        <Label Text="Pontos" FontSize="Medium" />
+                        <Label Text="{Binding Gamification.Points}" FontSize="Small" Margin="0" />
+                        <Label Text="Troféus" FontSize="Medium" />
+                        <Label Text="{Binding Gamification.Trophy}" FontSize="Small" Margin="0" />
+                    </StackLayout>
+                </Frame>                    
+            </StackLayout>
 		</ScrollView>
 	</ContentPage.Content>
 </ContentPage>

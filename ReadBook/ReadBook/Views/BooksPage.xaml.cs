@@ -35,12 +35,15 @@ namespace ReadBook.Views
 			await Navigation.PushAsync(new ProfilePage());
         }        
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
 
-			if (viewModel.Books.Count == 0)
+            if (viewModel.Books.Count == 0)
+            {
+                await viewModel.GetAllAsync(false);                
                 viewModel.LoadItemsCommand.Execute(null);
+            }
         }
     }
 }

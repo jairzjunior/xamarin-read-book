@@ -1,21 +1,18 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ReadBook.Models;
-using Xamarin.Forms;
 
 namespace ReadBook.ViewModels
 {
     public class SignUpViewModel : BaseViewModel
-    {	  
+    {
 		public SignUpViewModel()
         {
-			Title = "Novo usuário";		
+			Title = "Novo usuário";
         }
 
 		public async Task<bool> SignUp(User user)
 		{
-			await DataStore.InsertAsync(user);
-			App.User = user;
+			await DataStore.InsertAsync(user);			
 			return (user != null);
 		}
     }

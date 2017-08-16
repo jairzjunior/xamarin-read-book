@@ -6,11 +6,20 @@
 	<ContentPage.ToolbarItems>
   	  	<ToolbarItem Text="{Binding ReadText}" Clicked="Read_Clicked" />
     </ContentPage.ToolbarItems>
-	<StackLayout Spacing="20" Padding="15">
-		<Label Text="{Binding Book.Title}" FontSize="Medium"/>
-        <Label Text="{Binding Book.Genre}" FontSize="Medium"/>
-		<Label Text="Páginas" FontSize="Medium"/>
-		<Label Text="{Binding Book.Pages}" FontSize="Medium"/>
-		<Label Text="{Binding Book.Description}" FontSize="Small"/>
-    </StackLayout>
+    <ScrollView>
+        <StackLayout Spacing="5" Padding="5">
+            <Frame HasShadow="True">
+                <StackLayout Spacing="5">
+                    <Label Text="Título" FontAttributes="Bold"/>
+                    <Label Text="{Binding Book.Title}"/>
+                    <Label Text="Gênero" FontAttributes="Bold"/>
+                    <Label Text="{Binding Book.Genre}"/>
+                    <Label Text="Resumo" FontAttributes="Bold"/>
+                    <Label Text="{Binding Book.Description}" FontSize="Small"/>
+                    <Label Text="Total de Páginas" FontAttributes="Bold" />
+                    <Label Text="{Binding Book.Pages}"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

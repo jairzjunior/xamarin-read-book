@@ -1,25 +1,39 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using ReadBook.Models;
+using Xamarin.Forms;
+using System.Windows.Input;
+using ReadBook.Helpers;
 
 namespace ReadBook.ViewModels
 {
     public class LoginViewModel : BaseViewModel
-    {		
-		public async Task<bool> Login(User user)
-		{
-			App.User = null;            
-            var users = await DataStore.Connection.Table<User>().ToListAsync();
-            if (users != null && users.Count > 0)
+    {        
+        public ICommand LoginCommand { get; }
+        public LoginViewModel()
+        {
+            LoginCommand = new Command(async () => await ExecureLoginCommandAsync());            
 
+            Title = "Login";
+        }
+        private async Task ExecureLoginCommandAsync()
+        {
+            if (IsBusy || !(await LoginAsync()))
+                return;
+            else
             {
-				var userAzure = users.First(u => u.Username == user.Username);
-				if ((userAzure != null) && (user.Password == userAzure.Password))
-				{
-					App.User = userAzure;
-				}
-			}
-			return App.User != null;
-		}
+                App.SetMainPage();                
+            }
+        }        
+
+        public Task<bool> LoginAsync()
+        {
+            if (Settings.IsLoggedIn)
+            {                
+                return Task.FromResult(true);
+            }
+
+            return DataStore.LoginAsync();
+        }        
     }
 }

@@ -1,18 +1,39 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 x:Class="ReadBook.Views.LoginPage" Title="Login">
-	<ContentPage.ToolbarItems>
+			 x:Class="ReadBook.Views.LoginPage" 
+             Title="Login"
+             BackgroundColor="{StaticResource PrimaryDark}">
+	<!--<ContentPage.ToolbarItems>
 		<ToolbarItem Text="Novo usuário" Clicked="OnSignUpButtonClicked" />
-	</ContentPage.ToolbarItems>
-	<ContentPage.Content>
-		<StackLayout VerticalOptions="StartAndExpand">
-			<Label Text="Usuário" />
-			<Entry x:Name="usernameEntry" Placeholder="Usuário" />
-			<Label Text="Senha" />
-			<Entry x:Name="passwordEntry" Placeholder="Senha" IsPassword="true" />
-			<Button Text="Login" Clicked="OnLoginButtonClicked" />
-			<Label x:Name="messageLabel" />
-		</StackLayout>
-	</ContentPage.Content>
+	</ContentPage.ToolbarItems>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
+                    <Image Source="logo" VerticalOptions="Center" HeightRequest="256" />
+                </ContentView>
+            </StackLayout>
+        </StackLayout>
+        <ScrollView Grid.Row="1">
+            <StackLayout Orientation="Vertical" Padding="16,40,16,40" Spacing="10">
+                <!--<Label Text="Usuário" />
+			    <Entry x:Name="usernameEntry" Placeholder="Usuário" />
+			    <Label Text="Senha" />
+			    <Entry x:Name="passwordEntry" Placeholder="Senha" IsPassword="true" />
+			    <Button Text="Login" Clicked="OnLoginButtonClicked" />-->                
+                <Button 
+                    Margin="0,10,0,0"
+                    Command="{Binding LoginCommand}" 
+                    Text="Login com Facebook" 
+                    BackgroundColor="Blue" 
+                    TextColor="White"/>
+                <Label x:Name="messageLabel" />
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

@@ -15,8 +15,8 @@ namespace ReadBook.ViewModels
 
         public RankingViewModel()
         {
-            Title = "Ranking";
-			Gamifications = new ObservableRangeCollection<Gamification>();
+            Title = "Ranking";            
+            Gamifications = new ObservableRangeCollection<Gamification>();
 			LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
@@ -29,14 +29,9 @@ namespace ReadBook.ViewModels
 
 			try
 			{
-				Gamifications.Clear();                
-                var items = await DataStore.Connection.Table<Gamification>().ToListAsync();
-                foreach (var item in items.OrderByDescending(g => g.Points))
-				{                    
-                    item.User = (await DataStore.Connection.Table<User>().ToListAsync()).FirstOrDefault(u => u.Id == item.UserId);
-                    Gamifications.Add(item);
-				}
-			}
+                await GetAllAsync(true);
+
+            }
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
@@ -52,5 +47,20 @@ namespace ReadBook.ViewModels
 				IsBusy = false;
 			}
 		}
+
+        public async Task GetAllAsync(bool sync)
+        {
+            Gamifications.Clear();
+            if (sync)
+            {
+                await DataStore.SyncAsync<Gamification>(sync);
+            }                        
+            var items = await DataStore.GetAllAsync<Gamification>();
+            foreach (var item in items.OrderByDescending(g => g.Points))
+            {
+                item.User = (await DataStore.GetAllAsync<User>()).FirstOrDefault(u => u.Id == item.UserId);
+                Gamifications.Add(item);
+            }
+        }
     }
 }

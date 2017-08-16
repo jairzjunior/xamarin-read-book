@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 
 using ReadBook.Helpers;
 using ReadBook.Models;
-using ReadBook.Views;
 
 using Xamarin.Forms;
 using System.Linq;
@@ -18,7 +17,7 @@ namespace ReadBook.ViewModels
 
         public BooksViewModel()
         {
-            Title = "Esse eu já li!";
+            Title = "Read Book";
             Books = new ObservableRangeCollection<Book>();
             LoadItemsCommand = new Command(() => ExecuteLoadItemsCommand());            
         }
@@ -71,14 +70,7 @@ namespace ReadBook.ViewModels
 
             try
             {
-                Books.Clear();
-                var items = await DataStore.Connection.Table<Book>().ToListAsync();
-                if (items.Count == 0)
-                {
-                    PopulateBooks();
-                    items = await DataStore.Connection.Table<Book>().ToListAsync();
-                }                    
-                Books.ReplaceRange(items);
+                await GetAllAsync(true);
             }
             catch (Exception ex)
             {
@@ -94,6 +86,22 @@ namespace ReadBook.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        public async Task GetAllAsync(bool sync)
+        {
+            Books.Clear();
+            if (sync)
+            {
+                await DataStore.SyncAsync<Book>(sync);
+            }                
+            var items = await DataStore.GetAllAsync<Book>();
+
+            //if (sync && (items.Count() == 0))
+            //{
+            //    PopulateBooks();
+            //}
+            Books.ReplaceRange(items);
         }
     }
 }

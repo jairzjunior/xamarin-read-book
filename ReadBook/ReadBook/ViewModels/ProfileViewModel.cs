@@ -2,34 +2,53 @@
 using System.Linq;
 using System.Threading.Tasks;
 using ReadBook.Models;
+using ReadBook.Helpers;
 
 namespace ReadBook.ViewModels
 {
     public class ProfileViewModel : BaseViewModel
-    {	
-        public User User { get; set; }
+    {
+        private User user = null;
+        public User User
+        {
+            get { return user; }
+            set { SetProperty(ref user, value); }
+        }
 
-		Gamification gamification = null;
+        private Gamification gamification = null;
 		public Gamification Gamification
 		{
 			get { return gamification; }
 			set { SetProperty(ref gamification, value); }
 		}
 
-		public ProfileViewModel()
-        {
-			Title = "Perfil";
-			User = App.User;
+        private string imageProfile;
 
-			LoadGamification();
+        public string ImageProfile
+        {
+            get { return imageProfile; }
+            set { SetProperty(ref imageProfile, value); }
         }
 
-		public async void LoadGamification()
-		{            
-            var gamifications = await DataStore.Connection.Table<Gamification>().ToListAsync();
+        public ProfileViewModel()
+        {
+			Title = "Perfil";            
+        }
+
+        public async Task LoadUserAsync()
+        {
+            await DataStore.SyncAsync<User>(true);
+            User = (await DataStore.GetAllAsync<User>()).FirstOrDefault(u => u.Id == Settings.UserId);
+            ImageProfile = $"http://graph.facebook.com/{user.NameIdentifier}/picture?type=large";
+        }
+
+        public async Task LoadGamificationAsync()
+		{
+            await DataStore.SyncAsync<Gamification>(true);
+            var gamifications = await DataStore.GetAllAsync<Gamification>();
             if (gamifications != null)
 			{
-				Gamification = gamifications.FirstOrDefault(a => a.UserId == User.Id);
+				Gamification = gamifications.FirstOrDefault(a => a.UserId == User?.Id);
 			}
 		}
     }

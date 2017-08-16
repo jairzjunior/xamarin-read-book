@@ -14,5 +14,12 @@ namespace ReadBook.Views
 
 			BindingContext = this.viewModel;
 		}
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            await viewModel.LoadUserAsync();
+            await viewModel.LoadGamificationAsync();
+        }
     }
 }

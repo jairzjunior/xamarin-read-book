@@ -18,12 +18,15 @@ namespace ReadBook.Views
 			BindingContext = viewModel = new RankingViewModel();
 		}
 
-		protected override void OnAppearing()
+		protected async override void OnAppearing()
 		{
 			base.OnAppearing();
-
-			if (viewModel.Gamifications.Count == 0)
-				viewModel.LoadItemsCommand.Execute(null);
+            
+            if (viewModel.Gamifications.Count == 0)
+            {
+                await viewModel.GetAllAsync(false);
+                viewModel.LoadItemsCommand.Execute(null);
+            }				
 		}
 	}
 }

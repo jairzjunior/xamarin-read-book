@@ -12,7 +12,7 @@ namespace ReadBook.ViewModels
         /// <summary>
         /// Get the azure service instance
         /// </summary>
-		public IDataService DataStore => DependencyService.Get<IDataService>();
+		public ICloudService DataStore => DependencyService.Get<ICloudService>();
 
         bool isBusy = false;
         public bool IsBusy

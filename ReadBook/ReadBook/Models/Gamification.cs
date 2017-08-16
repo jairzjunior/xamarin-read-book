@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using SQLite;
 
 namespace ReadBook.Models
 {
@@ -8,8 +7,7 @@ namespace ReadBook.Models
 		[JsonProperty("userId")]
 		public string UserId { get; set; }
 
-		[JsonIgnore]
-        [Ignore]
+		[JsonIgnore]        
 		public User User { get; set; }
 
 		[JsonProperty("booksRead")]
